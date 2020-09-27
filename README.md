@@ -48,7 +48,7 @@ You will need the following requirements:
 
 If you will reimplement in Linux, I highly recommend using the conda command line for installation:
 
-    conda env create -f requirements.yml
+    $ conda env create -f requirements.yml
 
 ## Dataset
 
@@ -78,18 +78,18 @@ And Live-itW has directory structure as following:
 ## Training
 You can easily train the model using the command line:
 
-    CUDA_VISIBLE_DEVICES=0 python main.py /path/to/koniq10k --tensorboard --comment VQANetTraing
+    $ CUDA_VISIBLE_DEVICES=0 python main.py /path/to/koniq10k --tensorboard --comment VQANetTraing
 
 `VQANetTraing` is for checkpoint name and tensorboard folder name.
 
 ## Evaluation
 You can evaluate KonIQ-10k:
 
-    CUDA_VISIBLE_DEVICES=0 python main.py /path/to/koniq10k -e -p -a checkpoint
+    $ CUDA_VISIBLE_DEVICES=0 python main.py /path/to/koniq10k -e -p -a checkpoint
 
 You can also evaluate Live-itW:
 
-    CUDA_VISIBLE_DEVICES=0 python cross_test.py /path/to/LiveChallenge/ checkpoint
+    $ CUDA_VISIBLE_DEVICES=0 python cross_test.py /path/to/LiveChallenge/ checkpoint
 
 `checkpoint` is in checkpoints folder and without suffix.
 
@@ -99,12 +99,12 @@ It's worth noting that if you training from scratch, I add a timestep in the fro
 Download pre-trained model to checkpoints:
 
 ```
-cd /path/to/ICIP2020-WSP-IQA
-mkdir checkpoints
-cd checkpoints
-wget https://github.com/yichengsu/ICIP2020-WSP-IQA/releases/download/v0.1/checkpoint.pth.tar
-cd ..
-CUDA_VISIBLE_DEVICES=0 python main.py /path/to/koniq10k -e -p
+$ cd /path/to/ICIP2020-WSP-IQA
+$ mkdir checkpoints
+$ cd checkpoints
+$ wget https://github.com/yichengsu/ICIP2020-WSP-IQA/releases/download/v0.1/checkpoint.pth.tar
+$ cd ..
+$ CUDA_VISIBLE_DEVICES=0 python main.py /path/to/koniq10k -e -p
 ```
 
 You can use pre-trained model to get results as follow:
