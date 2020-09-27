@@ -26,6 +26,7 @@ There are example images and corresponding weight maps for channels 500, 1000, 1
 
 
 #### Citation
+
 ```
 @inproceedings{su2020WSP,
   title={BLIND NATURAL IMAGE QUALITY PREDICTION USING CONVOLUTIONAL NEURAL NETWORKS AND WEIGHTED SPATIAL POOLING},
@@ -52,6 +53,7 @@ If you will reimplement in Linux, I highly recommend using the conda command lin
 ## Dataset
 
 The KonIQ-10k dataset has the directory structure as:
+
 ```
 /path/to/koniq10k
   ├─1024x768
@@ -61,6 +63,7 @@ The KonIQ-10k dataset has the directory structure as:
 ```
 
 And Live-itW has directory structure as following:
+
 ```
 /path/to/LiveChallenge
   ├─Data
@@ -75,30 +78,35 @@ And Live-itW has directory structure as following:
 ## Training
 You can easily train the model using the command line:
 
-```
-CUDA_VISIBLE_DEVICES=0 python main.py /path/to/koniq10k --tensorboard --comment VQANetTraing
-```
+    CUDA_VISIBLE_DEVICES=0 python main.py /path/to/koniq10k --tensorboard --comment VQANetTraing
 
 `VQANetTraing` is for checkpoint name and tensorboard folder name.
 
 ## Evaluation
-You can evaluate Live-itW:
-```
-CUDA_VISIBLE_DEVICES=0 python cross_test.py /path/to/LiveChallenge/ checkpoint
-```
+You can evaluate KonIQ-10k:
+
+    CUDA_VISIBLE_DEVICES=0 python main.py /path/to/koniq10k -e -p -a checkpoint
+
+You can also evaluate Live-itW:
+
+    CUDA_VISIBLE_DEVICES=0 python cross_test.py /path/to/LiveChallenge/ checkpoint
+
 `checkpoint` is in checkpoints folder and without suffix.
 
 It's worth noting that if you training from scratch, I add a timestep in the front of checkpoint file and tensorboard, so the checkpoint name like `20200101-010101VQANetTraing`.
 
 ## Pre-trained Model
 Download pre-trained model to checkpoints:
+
 ```
+cd /path/to/ICIP2020-WSP-IQA
 mkdir checkpoints
 cd checkpoints
 wget https://github.com/yichengsu/ICIP2020-WSP-IQA/releases/download/v0.1/checkpoint.pth.tar
+cd ..
+CUDA_VISIBLE_DEVICES=0 python main.py /path/to/koniq10k -e -p
 ```
 
-## Results
 You can use pre-trained model to get results as follow:
 
 |           | PLCC  | SRCC  | RMSE  |
