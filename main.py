@@ -161,8 +161,7 @@ def main_worker(gpu, ngpus_per_node, args):
         validate(val_loader, model, criterion, 0, writer, args)
         return
 
-    best_plcc = 0
-    best_res = None
+    best_res = (0, 0, 0)
     for epoch in range(args.epochs):
         if args.multiprocessing_distributed:
             train_sampler.set_epoch(epoch)
@@ -175,7 +174,7 @@ def main_worker(gpu, ngpus_per_node, args):
         scheduler.step(loss)
 
         if gpu == 0 and epoch > 50:
-            is_best = res[0] > best_plcc
+            is_best = res[0] > best_res[0]
             if is_best:
                 best_res = res
 
